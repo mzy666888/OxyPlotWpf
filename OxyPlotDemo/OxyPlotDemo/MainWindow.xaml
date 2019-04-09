@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="OxyPlotDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OxyPlotDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxyplot="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}" />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <oxyplot:PlotView Model="{Binding Model}" />
+        <oxyplot:Plot Title="实时曲线" Grid.Row="1">
+            <oxyplot:Plot.Axes>
+                <oxyplot:DateTimeAxis Title="时间" />
+                <oxyplot:LinearAxis Title="数值" />
+            </oxyplot:Plot.Axes>
+            <oxyplot:Plot.Series>
+                <oxyplot:LineSeries
+                    Title="温度"
+                    ItemsSource="{Binding TempDataPoints}"
+                    MarkerType="Circle"
+                    Smooth="True" />
+                <oxyplot:LineSeries
+                    Title="温度"
+                    ItemsSource="{Binding HumiDataPoints}"
+                    MarkerType="Circle"
+                    Smooth="True" />
+            </oxyplot:Plot.Series>
+        </oxyplot:Plot>
+    </Grid>
+</Window>
